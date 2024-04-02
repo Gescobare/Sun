@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React, { Component, useEffect, useState } from "react"
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+    const [data, setData] = useState(null)
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("User", "etraining");
+    urlencoded.append("Password", " ");
+    urlencoded.append("option", "municipios");
+
+    var requestOptions = {
+      method: 'POST',
+      body: urlencoded,
+      redirect: 'follow'
+    };
+    useEffect(() => {
+      fetch("https://www.php.engenius.com.co/DatabaseIE.php", requestOptions)
+      .then(response => response.json())
+      .then(res => console.log(res))
+      .then((data) => setData(data))
+    }, [])
+    
+  
+    return (
+      <div className="App">
+        
+        <div className="form-group">
+          <p>Hola</p>
+        </div>
+      </div>
+    )
+}
 export default App;
